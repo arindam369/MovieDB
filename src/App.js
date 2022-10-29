@@ -7,7 +7,6 @@ import MovieContext from "./store/MovieContext";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 export default function App(){
   const movieCtx = useContext(MovieContext);
   window.addEventListener("load", ()=>{
