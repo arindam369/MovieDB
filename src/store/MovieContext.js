@@ -33,17 +33,16 @@ export const MovieContextProvider = (props)=>{
     const [heading, setHeading] = useState("");
     const [isOpened, setisOpened] = useState(false);
     const [visibleTrailer, setVisibleTrailer] = useState(false);
-    const [trailer_key, setTrailer_key] = useState("6U8ikxgyn58");
+    const [trailer_key, setTrailer_key] = useState("");
 
-    const API_KEY = "8d9c6994c64a7b4b56743d30dcae059f";
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    
     const findMovie = (movieName)=>{
         setHeading(`Search Results for '${movieName}'`);
         setisOpened(false);
         const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${movieName}`;
-
         axios.get(SEARCH_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -55,7 +54,6 @@ export const MovieContextProvider = (props)=>{
         const POPULAR_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
         axios.get(POPULAR_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -67,7 +65,6 @@ export const MovieContextProvider = (props)=>{
         const TOP_RATED_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
         axios.get(TOP_RATED_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -79,7 +76,6 @@ export const MovieContextProvider = (props)=>{
         const NOW_PLAYING_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
         axios.get(NOW_PLAYING_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -91,7 +87,6 @@ export const MovieContextProvider = (props)=>{
         const UPCOMING_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
         axios.get(UPCOMING_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -103,7 +98,6 @@ export const MovieContextProvider = (props)=>{
         const TRENDING_URL = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`;
         axios.get(TRENDING_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -115,7 +109,6 @@ export const MovieContextProvider = (props)=>{
         const DISCOVER_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=2&with_watch_monetization_types=flatrate`;
         axios.get(DISCOVER_URL).then((response)=>{
             setFoundMovies(response.data.results);
-            // console.log(response.data.results);
             return response;
         }).catch((err)=>{
             return {err: err};
@@ -142,13 +135,14 @@ export const MovieContextProvider = (props)=>{
         toast.error("Removed from Favourites");
         return favMovies;
     }
+
     useEffect(()=>{
         setFavMovies(JSON.parse(localStorage.getItem("MovieDB")) || []);
     },[])
-
     const displayFullscreen = ()=>{
         setisOpened(true);
     }
+    
     const findExternalID = (movieID)=>{
         const EXTERNAL_ID_URL = `https://api.themoviedb.org/3/movie/${movieID}/external_ids?api_key=${API_KEY}`;
         axios.get(EXTERNAL_ID_URL).then((response)=>{
@@ -161,10 +155,8 @@ export const MovieContextProvider = (props)=>{
         const EXTERNAL_ID_URL = `https://api.themoviedb.org/3/movie/${movieID}/external_ids?api_key=${API_KEY}`;
         axios.get(EXTERNAL_ID_URL).then((response)=>{
             const TRAILER_URL = `https://api.themoviedb.org/3/movie/${response.data.imdb_id}/videos?api_key=${API_KEY}`;
-            console.log(TRAILER_URL);
 
             axios.get(TRAILER_URL).then((response)=>{
-                console.log(response.data)
                 setTrailer_key(response.data.results[0].key);
                 setVisibleTrailer(true);
                 if(response.data.results && (response.data.results.length===0 || (response.data.results[0].key && response.data.results[0].key.trim().length===0))){
@@ -180,7 +172,6 @@ export const MovieContextProvider = (props)=>{
         })
     }
     const hideTrailer = ()=>{
-        console.log("hide trailer");
         setVisibleTrailer(false);
     }
 

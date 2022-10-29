@@ -1,13 +1,14 @@
 import "./Navbar.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaRegWindowClose } from "react-icons/fa";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import MovieContext from "../../store/MovieContext";
+import LoadingBar from 'react-top-loading-bar';
 
 export default function Navbar() {
     const [visibleNavbar, setVisibleNavbar] = useState(false);
     const [movieName, setMovieName] = useState("");
-
+    const loadingRef = useRef(null)
     const movieCtx = useContext(MovieContext);
 
     function showNavbar(){
@@ -19,35 +20,43 @@ export default function Navbar() {
 
     function handleSubmit(e){
       e.preventDefault();
+      loadingRef.current.continuousStart();
       movieCtx.searchMovie(movieName);
       setMovieName("");
     }
 
     function findTrendingMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.findTrendingMovies();
       hideNavbar();
     }
     function findPopularMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.findPopularMovies();
       hideNavbar();
     }
     function findFavouriteMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.findFavouriteMovies();
       hideNavbar();
     }
     function findTopRatedMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.findTopRatedMovies();
       hideNavbar();
     }
     function findNowPlayingMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.findNowPlayingMovies();
       hideNavbar();
     }
     function findUpcomingMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.findUpcomingMovies();
       hideNavbar();
     }
     function discoverMovies(){
+      loadingRef.current.continuousStart();
       movieCtx.discoverMovies();
       hideNavbar();
     }
@@ -79,6 +88,7 @@ export default function Navbar() {
             <input type="text" placeholder="Search Movies" value={movieName} onChange={(e)=>{setMovieName(e.target.value)}}/>
           </form>
         </div>
+        <LoadingBar color='#0275d8' ref={loadingRef} />
       </nav>
       
       {visibleNavbar && 
