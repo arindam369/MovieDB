@@ -4,12 +4,15 @@ import Movies from "./components/Movies/Movies";
 import Modal from "./components/Modal/Modal";
 import { useContext } from "react";
 import MovieContext from "./store/MovieContext";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function App(){
   const movieCtx = useContext(MovieContext);
+  window.addEventListener("load", ()=>{
+    movieCtx.discoverMovies();
+  })
 
   return (
     <>

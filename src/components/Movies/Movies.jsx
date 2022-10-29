@@ -103,7 +103,7 @@ export default function Movies(){
                 return prevState + " "+ findGenres(id)+", ";
             })
         })
-    }, [fullMovie.genre_ids]);
+    }, [fullMovie]);
 
     return (
         <>
@@ -111,13 +111,13 @@ export default function Movies(){
             <div className="view-all">
                 <h2 className="heading">{movieCtx.heading}</h2>
                 <div className="movies-container">
-                    {movieCtx.heading !== "Favourites"?
+                    {movieCtx.heading !== "Favourite Movies"?
                         movieCtx.movies.length > 0 && movieCtx.movies.map((movie)=>{
                             return <Movie movieData={movie} key={movie.id} onImage={openImage}/>;
                         }):
-                        movieCtx.favouriteMovies.length>0 && movieCtx.favouriteMovies.map((favMovie)=>{
+                        movieCtx.favouriteMovies.length>0 ? movieCtx.favouriteMovies.map((favMovie)=>{
                             return <Movie movieData={favMovie} key={favMovie.id} onImage={openImage}/>
-                        })
+                        }):<h4>No Movies Found</h4>
                     }
                 </div>
             </div>}
@@ -136,7 +136,7 @@ export default function Movies(){
                             </div>
                             <div className="rating-fav-trailer">
                                     <div className="rating">{fullMovie.vote_average.toFixed(1)}</div>
-                                    <div className="fav"> {checkFavourite()? <div data-title="Remove from Favourites"> <IoIosRemoveCircleOutline onClick={removeFavourite}/></div>: <div data-title="Add to Favourites"> <MdFavorite onClick={addFavourite} /></div>} </div>
+                                    <div className="fav"> {checkFavourite()? <div data-title="Remove from Favourites" onClick={removeFavourite}> <IoIosRemoveCircleOutline/></div>: <div data-title="Add to Favourites" onClick={addFavourite}> <MdFavorite/></div>} </div>
                                     <div className="trailer" data-title="Play Trailer" onClick={playTrailer}><BsPlayFill/> </div>
                             </div>
                             <h5>Overview</h5>

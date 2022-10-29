@@ -3,6 +3,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.6rem;
     color: rgb(17, 60, 159);
+    color: white;
 }
 .movies-container{
     display: flex;
@@ -10,6 +11,14 @@
     align-items: center;
     flex-wrap: wrap;
     padding: 30px 10px;
+}
+.movies-container h4{
+    text-align: center;
+    width: 100%;
+    margin: 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(141, 141, 141);
+    font-size: 1.1rem;
 }
 .movie-fullscreen-container{
     display: flex;

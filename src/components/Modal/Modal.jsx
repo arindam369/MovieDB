@@ -12,7 +12,7 @@ function ModalOverlay(props) {
 
   return (
     <div className="modal-container">
-      {movieCtx.visibleTrailer && 
+      {movieCtx.visibleTrailer &&
       <iframe src={`https://www.youtube.com/embed/${movieCtx.trailer_key}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       }</div>
   );
