@@ -189,4 +189,7 @@
         font-size: .85rem;
         text-align: center;
     }
+    .movie-fullscreen-container{
+        height: 120vh;
+    }
 }

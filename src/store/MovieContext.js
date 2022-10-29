@@ -17,16 +17,21 @@ const MovieContext = React.createContext({
     addFavouriteMovie: (movieData) => {},
     removeFavouriteMovie: (movieData) => {},
     isOpened: "",
-    displayFullscreen: ()=>{}
+    displayFullscreen: ()=>{},
+    findExternalID: ()=>{},
+    findTrailer: ()=>{},
+    trailer_key: "",
+    visibleTrailer: "",
+    hideTrailer: ()=>{}
 });
 
-// https://api.themoviedb.org/3/tv/popular?api_key=8d9c6994c64a7b4b56743d30dcae059f&language=en-US&page=1  popular tv shows
-// https://api.themoviedb.org/3/tv/top_rated?api_key=8d9c6994c64a7b4b56743d30dcae059f&language=en-US&page=1  toprated tv shows
 export const MovieContextProvider = (props)=>{
     const [foundMovies, setFoundMovies] = useState([]);
     const [favMovies, setFavMovies] = useState(localStorage.getItem("MovieDB") || []);
     const [heading, setHeading] = useState("");
     const [isOpened, setisOpened] = useState(false);
+    const [visibleTrailer, setVisibleTrailer] = useState(false);
+    const [trailer_key, setTrailer_key] = useState("6U8ikxgyn58");
 
     const API_KEY = "8d9c6994c64a7b4b56743d30dcae059f";
     const findMovie = (movieName)=>{
@@ -109,7 +114,7 @@ export const MovieContextProvider = (props)=>{
         });
         return favMovies;
     }
-    const findFavouriteMovies = ()=>{   // work due
+    const findFavouriteMovies = ()=>{
         setHeading("Favourites");
         setisOpened(false);
         setFavMovies(JSON.parse(localStorage.getItem("MovieDB")) || []);
@@ -128,6 +133,37 @@ export const MovieContextProvider = (props)=>{
     const displayFullscreen = ()=>{
         setisOpened(true);
     }
+    const findExternalID = (movieID)=>{
+        const EXTERNAL_ID_URL = `https://api.themoviedb.org/3/movie/${movieID}/external_ids?api_key=${API_KEY}`;
+        axios.get(EXTERNAL_ID_URL).then((response)=>{
+            return response.data.imdb_id;
+        }).catch((err)=>{
+            return err;
+        })
+    }
+    const findTrailer = (movieID)=>{
+        const EXTERNAL_ID_URL = `https://api.themoviedb.org/3/movie/${movieID}/external_ids?api_key=${API_KEY}`;
+        axios.get(EXTERNAL_ID_URL).then((response)=>{
+            const TRAILER_URL = `https://api.themoviedb.org/3/movie/${response.data.imdb_id}/videos?api_key=${API_KEY}`;
+            console.log(TRAILER_URL);
+
+            axios.get(TRAILER_URL).then((response)=>{
+                setTrailer_key(response.data.results[0].key);
+                setVisibleTrailer(true);
+                // console.log("key: ");
+                // console.log(response.data.results[1].key);
+                return response.data.results[0].key;
+            }).catch((err)=>{
+                return err;
+            })
+        }).catch((err)=>{
+            return err;
+        })
+    }
+    const hideTrailer = ()=>{
+        console.log("hide trailer");
+        setVisibleTrailer(false);
+    }
 
     const movieContext = {
         heading: heading,
@@ -143,7 +179,12 @@ export const MovieContextProvider = (props)=>{
         addFavouriteMovie: addFavouriteMovie,
         removeFavouriteMovie: removeFavouriteMovie,
         isOpened: isOpened,
-        displayFullscreen: displayFullscreen
+        displayFullscreen: displayFullscreen,
+        findExternalID: findExternalID,
+        findTrailer: findTrailer,
+        trailer_key: trailer_key,
+        visibleTrailer: visibleTrailer,
+        hideTrailer: hideTrailer
     }
 
     return <MovieContext.Provider value={movieContext}> {props.children} </MovieContext.Provider>
