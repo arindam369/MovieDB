@@ -32,7 +32,7 @@ export default function Movie(props){
     return (
         <>
             <div className="movie-box">
-                <img src={props.movieData.poster_path ? IMG_PATH+props.movieData.poster_path : NO_IMAGE_PATH} alt="" />
+                <img src={props.movieData.poster_path ? IMG_PATH+props.movieData.poster_path : NO_IMAGE_PATH} alt="img" onClick={()=>{props.onImage(props.movieData)}}/>
                 <div className="description">
                     <div className="favourites-rating">
                         <div className={checkFavourite()?"favourites favMovie":"favourites"}> <MdFavorite onClick={toggleFavourite}/> </div>
