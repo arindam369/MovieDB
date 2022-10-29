@@ -20,6 +20,7 @@ export default function Navbar() {
     function handleSubmit(e){
       e.preventDefault();
       movieCtx.searchMovie(movieName);
+      setMovieName("");
     }
 
     function findTrendingMovies(){
@@ -46,6 +47,10 @@ export default function Navbar() {
       movieCtx.findUpcomingMovies();
       hideNavbar();
     }
+    function discoverMovies(){
+      movieCtx.discoverMovies();
+      hideNavbar();
+    }
 
   return (
     <>
@@ -58,7 +63,7 @@ export default function Navbar() {
             <FaRegWindowClose onClick={hideNavbar}/>
           </div>}
           <div id="desktop-elements">
-            <div className="logo">MovieDB</div>
+            <div className="logo" onClick={discoverMovies}>MovieDB</div>
             <div className="elements">
               <li onClick={findTrendingMovies}>Trending</li>
               <li onClick={findPopularMovies}>Popular</li>
@@ -71,14 +76,14 @@ export default function Navbar() {
         </div>
         <div className="rightPart">
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Search Movies" onChange={(e)=>{setMovieName(e.target.value)}}/>
+            <input type="text" placeholder="Search Movies" value={movieName} onChange={(e)=>{setMovieName(e.target.value)}}/>
           </form>
         </div>
       </nav>
       
       {visibleNavbar && 
       <div id="mobile-elements">
-        <div className="logo">MovieDB</div>
+        <div className="logo" onClick={discoverMovies}>MovieDB</div>
         <div className="elements">
               <li onClick={findTrendingMovies}>Trending</li>
               <li onClick={findPopularMovies}>Popular</li>

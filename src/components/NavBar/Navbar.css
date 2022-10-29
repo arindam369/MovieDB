@@ -6,6 +6,11 @@ nav{
     color: white;
     padding: 15px 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 200;
 }
 nav .leftPart{
     display: flex;
@@ -15,6 +20,7 @@ nav .leftPart{
 nav .leftPart .logo{
     font-size: 1.2rem;
     margin-right: 30px;
+    cursor: pointer;
 }
 nav .leftPart .elements{
     display: flex;
@@ -45,6 +51,12 @@ nav .rightPart input::placeholder{
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 8px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 200;
+
 }
 #mobile-elements .logo{
     font-size: 1.2rem;
