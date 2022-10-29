@@ -1,0 +1,70 @@
+.backdrop{
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.modal-container{
+    width: 600px;
+    height: 400px;
+    z-index: 101;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-container iframe{
+    height: 400px;
+    width: 600px;
+}
+h3{
+    color: white;
+}
+@media(max-width: 770px){
+    .modal-container{
+        height: 380px;
+        width: 500px;
+    }
+    .modal-container iframe{
+        height: 380px;
+        width: 500px;
+    }
+}
+@media(max-width: 650px){
+    .modal-container{
+        height: 330px;
+        width: 400px;
+    }
+    .modal-container iframe{
+        height: 330px;
+        width: 400px;
+    }
+}
+@media(max-width: 500px){
+    .modal-container{
+        height: 325px;
+        width: 350px;
+    }
+    .modal-container iframe{
+        height: 325px;
+        width: 350px;
+    }
+}
+@media(max-width: 390px){
+    .modal-container{
+        height: 260px;
+        width: 280px;
+    }
+    .modal-container iframe{
+        height: 260px;
+        width: 280px;
+    }
+}
