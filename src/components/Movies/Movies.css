@@ -11,8 +11,182 @@
     flex-wrap: wrap;
     padding: 30px 10px;
 }
+.movie-fullscreen-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    background-color: rgb(65, 65, 65);
+    color: white;
+    height: 100vh;
+}
+.movie-fullscreen-container .movie-fullscreen-image-box{
+    margin-left: 30px;
+}
+.movie-fullscreen-container .movie-fullscreen-image-box img{
+    height: 400px;
+    width: 300px;
+    border-radius: 12px;
+    position: relative;
+    z-index: 100;
+    opacity: .8;
+}
+.movie-fullscreen-container .movie-fullscreen-description{
+    width: 70%;
+    z-index: 100;
+    /* border: 3px solid blue; */
+    padding: 10px 30px;
+}
+.movie-fullscreen-container .movie-name{
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.movie-fullscreen-container .releaseDate-genre{
+    display: flex;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    align-items: center;
+    margin-top: 5px;
+    color: rgb(224, 224, 224);
+}
+.releaseDate-genre .genre{
+    margin-left: 20px;
+    text-align: justify;
+}
+.rating-fav-trailer{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.rating-fav-trailer .rating{
+    background-color: white;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 8px 8px;
+    margin: 0px 20px;
+    border-radius: 50%;
+}
+.rating-fav-trailer .fav, .rating-fav-trailer .trailer{
+    background-color: #032541;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9rem;
+    margin: 0px 20px;
+    cursor: pointer;
+}
+.rating-fav-trailer .fav div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.1s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -30px;
+    left: 20px;
+    padding: 6px 18px;
+    color: white;
+    white-space: nowrap; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;  
+    border-radius: 5px;  
+    -moz-box-shadow: 0px 0px 4px #222;  
+    -webkit-box-shadow: 0px 0px 4px #222;  
+    box-shadow: 0px 0px 4px #222;  
+    background: #032541;
+    opacity: 0;
+    z-index: 99;
+    font-size: .82rem;
+    visibility: hidden;
+}
+[data-title] {
+    position: relative;
+}
+
+.backdropImage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.40;
+}
+.movie-fullscreen-container h5{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3rem;
+    margin: 40px 0px 5px;
+}
+.movie-fullscreen-container .overview{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: .9rem;
+    letter-spacing: 1px;
+    padding: 5px;
+    width: 80%;
+    /* border: 1px solid red; */
+    text-align: justify;
+}
+
+@media (max-width: 890px){
+    .movie-fullscreen-container .movie-fullscreen-image-box img{
+        height: 370px;
+        width: 260px;
+    }
+    .movie-fullscreen-container .overview{
+        width: 90%;
+    }
+}
+@media (max-width: 715px){
+    .movie-fullscreen-container{
+        flex-direction: column;
+    }
+    .movie-fullscreen-container .movie-fullscreen-image-box{
+        margin-left: 0px;
+    }
+    .movie-fullscreen-container .movie-name{
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .movie-fullscreen-container .releaseDate-genre{
+        justify-content: center;
+    }
+    .rating-fav-trailer{
+        justify-content: center;
+    }
+    .movie-fullscreen-container .overview{
+        width: 100%;
+    }
+    .movie-fullscreen-container{
+        justify-content: center;
+    }
+    .movie-fullscreen-image-box{
+        margin-bottom: 10px;
+    }
+    .movie-fullscreen-description{
+        width: 70%;
+        z-index: 100;
+        padding: 10px 30px;
+    }
+}
+@media (max-width: 680px){
+    .movie-fullscreen-container .movie-fullscreen-image-box img{
+        height: 350px;
+        width: 250px;
+    }
+    
+}
 @media (max-width: 575px){
     .movies-container{
         justify-content: center;
+    }
+    .releaseDate-genre{
+        font-size: .85rem;
+        text-align: center;
     }
 }
