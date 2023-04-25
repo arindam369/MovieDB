@@ -1,7 +1,7 @@
 
 # MovieDB
 
-Discover trending, popular, upcoming Hollywood Movies at just one click with **Musico!**
+Discover trending, popular, upcoming Hollywood Movies at just one click with **MovieDB!**
 
 <img src="https://user-images.githubusercontent.com/92720594/234376736-b4bb6bd9-0346-4542-96c2-a39117746032.gif" data-canonical-src="https://user-images.githubusercontent.com/92720594/234376736-b4bb6bd9-0346-4542-96c2-a39117746032.gif" width="500" height="320" />
 <br/>
